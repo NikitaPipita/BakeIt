@@ -1,4 +1,4 @@
-class CakeModel {
+class CakeModel extends Comparable<CakeModel>{
   int id;
   String title;
 
@@ -16,9 +16,14 @@ class CakeModel {
     '_id': id,
     'title': title,
   };
+
+  @override
+  int compareTo(CakeModel other) {
+    return this.title.toLowerCase().compareTo(other.title.toLowerCase());
+  }
 }
 
-class ProductModel {
+class ProductModel extends Comparable<ProductModel>{
   int id;
   String title;
   double price;
@@ -44,6 +49,11 @@ class ProductModel {
     'price' : price,
     'count' : count,
   };
+
+  @override
+  int compareTo(ProductModel other) {
+    return this.title.toLowerCase().compareTo(other.title.toLowerCase());
+  }
 }
 
 class IngredientModel {

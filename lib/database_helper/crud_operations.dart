@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/services.dart';
@@ -57,6 +58,7 @@ class DatabaseHelper {
     return true;
   }
 
+
   static Future<void> insertCake(String title) async {
     final Database db = await database;
 
@@ -87,19 +89,24 @@ class DatabaseHelper {
     print(response);
   }
 
+
   static Future<List<CakeModel>> getCakes() async {
     final Database db = await database;
 
     var response = await db.query('cake');
     List<CakeModel> cakeList = response.map((c) => CakeModel.fromMap(c)).toList();
+    cakeList.sort();
     return cakeList;
   }
 
   static Future<List<ProductModel>> getProducts() async {
     final Database db = await database;
 
-    var response = await db.query('product');
+    var response = await db.query(
+        'product',
+    );
     List<ProductModel> productList = response.map((c) => ProductModel.fromMap(c)).toList();
+    productList.sort();
     return productList;
   }
 
@@ -119,6 +126,7 @@ class DatabaseHelper {
         ProductInfoAndQuantityInCakeModel.fromMap(c)).toList();
     return productInfoAndQuantityInCakeList;
   }
+
 
   static Future<void> updateCake(CakeModel cake) async {
     final Database db = await database;
@@ -156,6 +164,7 @@ class DatabaseHelper {
     print(response);
   }
 
+
   static Future<void> deleteCake(int id) async {
     final Database db = await database;
 
@@ -165,17 +174,17 @@ class DatabaseHelper {
       whereArgs: [id],
     );
     print(response);
+
+    var cakeProductDeleteResponse = await db.delete(
+      'cake_product',
+      where: "cake_id = ?",
+      whereArgs: [id],
+    );
+    print(cakeProductDeleteResponse);
   }
 
   static Future<void> deleteProduct(int id) async {
     final Database db = await database;
-
-    var cakeProductDeleteResponse = await db.delete(
-      'cake_product',
-      where: "product_id = ?",
-      whereArgs: [id],
-    );
-    print(cakeProductDeleteResponse);
 
     var productDeleteResponse = await db.delete(
       'product',
@@ -183,6 +192,13 @@ class DatabaseHelper {
       whereArgs: [id],
     );
     print(productDeleteResponse);
+
+    var cakeProductDeleteResponse = await db.delete(
+      'cake_product',
+      where: "product_id = ?",
+      whereArgs: [id],
+    );
+    print(cakeProductDeleteResponse);
   }
 
   static Future<void> deleteCakeProduct(int id) async {

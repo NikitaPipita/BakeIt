@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         future: DatabaseHelper.copyDB(),
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot){
           if (snapshot.hasData) {
-            return BottomNavigationStatefulWidget();
+            return RootPage();
           }
           return Scaffold(
             body: Center(
@@ -37,16 +37,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class BottomNavigationStatefulWidget extends StatefulWidget {
-  BottomNavigationStatefulWidget({Key key}) : super(key: key);
+class RootPage extends StatefulWidget {
+  RootPage({Key key}) : super(key: key);
 
   @override
-  _BottomNavigationStatefulWidgetState createState() =>
-      _BottomNavigationStatefulWidgetState();
+  _RootPageState createState() =>
+      _RootPageState();
 }
 
-class _BottomNavigationStatefulWidgetState
-    extends State<BottomNavigationStatefulWidget> {
+class _RootPageState
+    extends State<RootPage> {
   int _selectedIndex = 0;
   Widget _selectedPage = CakeList();
   static const TextStyle optionStyle =

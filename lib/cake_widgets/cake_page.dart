@@ -79,12 +79,6 @@ class _CakeTextFormState extends State<CakeTextForm> {
     });
   }
 
-  void addIngredientLineWidget() {
-    setState(() {
-      createIngredientLineWidget();
-    });
-  }
-
   ///Called if the cake editing page was opened
   ///adds a widget of each ingredient whose foreign key is the id of this cake
   void creatingIngredientLineWidgetsBasedOnDataFromTheDatabase
@@ -128,6 +122,12 @@ class _CakeTextFormState extends State<CakeTextForm> {
   void dispose() {
     _titleController.dispose();
     super.dispose();
+  }
+
+  void addIngredientLineWidget() {
+    setState(() {
+      createIngredientLineWidget();
+    });
   }
 
   @override

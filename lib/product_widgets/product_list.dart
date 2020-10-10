@@ -5,7 +5,7 @@ import '../database_helper/data_models.dart';
 import 'product_page.dart';
 
 class ProductList extends StatefulWidget {
-  @override 
+  @override
   _ProductListState createState() => _ProductListState();
 }
 
@@ -37,9 +37,6 @@ class _ProductListState extends State<ProductList> {
                       MaterialPageRoute(
                         builder: (context) => ProductPage(item: item),
                       ),
-                      ///TODO
-                      ///Пошаманить с перезагрузкой страницы
-                      ///Иногда не обновляются данные (при удалении)
                     ).then((value){
                       setState(() {});
                     });
