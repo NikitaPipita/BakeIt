@@ -1,4 +1,4 @@
-class CakeModel extends Comparable<CakeModel>{
+class CakeModel extends Comparable<CakeModel> {
   int id;
   String title;
 
@@ -8,14 +8,14 @@ class CakeModel extends Comparable<CakeModel>{
   });
 
   factory CakeModel.fromMap(Map<String, dynamic> json) => new CakeModel(
-    id: json['_id'],
-    title: json['title'],
-  );
+        id: json['_id'],
+        title: json['title'],
+      );
 
   Map<String, dynamic> toMap() => {
-    '_id': id,
-    'title': title,
-  };
+        '_id': id,
+        'title': title,
+      };
 
   @override
   int compareTo(CakeModel other) {
@@ -23,7 +23,7 @@ class CakeModel extends Comparable<CakeModel>{
   }
 }
 
-class ProductModel extends Comparable<ProductModel>{
+class ProductModel extends Comparable<ProductModel> {
   int id;
   String title;
   double price;
@@ -37,18 +37,18 @@ class ProductModel extends Comparable<ProductModel>{
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> json) => new ProductModel(
-    id: json['_id'],
-    title: json['title'],
-    price: json['price'],
-    count: json['count'],
-  );
+        id: json['_id'],
+        title: json['title'],
+        price: json['price'],
+        count: json['count'],
+      );
 
   Map<String, dynamic> toMap() => {
-    '_id': id,
-    'title': title,
-    'price' : price,
-    'count' : count,
-  };
+        '_id': id,
+        'title': title,
+        'price': price,
+        'count': count,
+      };
 
   @override
   int compareTo(ProductModel other) {
@@ -67,17 +67,18 @@ class IngredientModel {
     this.count,
   });
 
-  factory IngredientModel.fromMap(Map<String, dynamic> json) => new IngredientModel(
-    id: json['_id'],
-    title: json['title'],
-    count: json['count'],
-  );
+  factory IngredientModel.fromMap(Map<String, dynamic> json) =>
+      new IngredientModel(
+        id: json['_id'],
+        title: json['title'],
+        count: json['count'],
+      );
 
   Map<String, dynamic> toMap() => {
-    '_id': id,
-    'title': title,
-    'count' : count,
-  };
+        '_id': id,
+        'title': title,
+        'count': count,
+      };
 }
 
 class MaxCakeId {
@@ -88,8 +89,8 @@ class MaxCakeId {
   });
 
   factory MaxCakeId.fromMap(Map<String, dynamic> json) => new MaxCakeId(
-    id: json['_id'],
-  );
+        id: json['_id'],
+      );
 }
 
 class CakeProductModel {
@@ -105,13 +106,12 @@ class CakeProductModel {
     this.productCount,
   });
 
-
   Map<String, dynamic> toMap() => {
-    '_id': id,
-    'cake_id': cakeId,
-    'product_id' : productId,
-    'product_count' : productCount,
-  };
+        '_id': id,
+        'cake_id': cakeId,
+        'product_id': productId,
+        'product_count': productCount,
+      };
 }
 
 class ProductInfoAndQuantityInCakeModel {
@@ -125,10 +125,11 @@ class ProductInfoAndQuantityInCakeModel {
     this.productQuantityInCake,
   });
 
-  factory ProductInfoAndQuantityInCakeModel.fromMap(Map<String, dynamic> json) =>
+  factory ProductInfoAndQuantityInCakeModel.fromMap(
+          Map<String, dynamic> json) =>
       new ProductInfoAndQuantityInCakeModel(
-    productPrice: json['price'],
-    productCount: json['count'],
-    productQuantityInCake: json['product_count'],
-  );
+        productPrice: json['price'],
+        productCount: json['count'],
+        productQuantityInCake: json['product_count'],
+      );
 }

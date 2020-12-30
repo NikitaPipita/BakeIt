@@ -15,7 +15,7 @@ class _CakeListState extends State<CakeList> {
     return Container(
       child: FutureBuilder<List<CakeModel>>(
         future: DatabaseHelper.getCakes(),
-        builder: (BuildContext context, AsyncSnapshot<List<CakeModel>> snapshot) {
+        builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
               itemCount: snapshot.data.length,
@@ -26,24 +26,7 @@ class _CakeListState extends State<CakeList> {
                     item.title,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: FutureBuilder<List<ProductInfoAndQuantityInCakeModel>>(
-                    future: DatabaseHelper.getProductsInfoAndTheirQuantityInCake(item.id),
-                    builder: (context, snapshot){
-                      if (snapshot.hasData) {
-                        double totalPrice = 0;
-                        for (ProductInfoAndQuantityInCakeModel ingredient in snapshot.data) {
-                          totalPrice += (ingredient.productQuantityInCake * ingredient.productPrice) / ingredient.productCount;
-                        }
-                        return Text (
-                          totalPrice.toStringAsFixed(2).toString() + '₴',
-                        );
-                      } else {
-                        return Text (
-                          item.id.toString() + '₴',
-                        );
-                      }
-                    },
-                  ),
+                  subtitle: CakePrice(item),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -64,6 +47,42 @@ class _CakeListState extends State<CakeList> {
           }
         },
       ),
+    );
+  }
+}
+
+
+class CakePrice extends StatefulWidget {
+  final CakeModel _item;
+
+  CakePrice(this._item);
+
+  @override
+  _CakePriceState createState() => _CakePriceState();
+}
+
+class _CakePriceState extends State<CakePrice> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<ProductInfoAndQuantityInCakeModel>>(
+      future: DatabaseHelper
+          .getProductsInfoAndTheirQuantityInCake(widget._item.id),
+      builder: (context, snapshot){
+        if (snapshot.hasData) {
+          double totalPrice = 0;
+          for (ProductInfoAndQuantityInCakeModel ingredient in snapshot.data) {
+            totalPrice += (ingredient.productQuantityInCake
+                * ingredient.productPrice) / ingredient.productCount;
+          }
+          return Text (
+            totalPrice.toStringAsFixed(2).toString() + '₴',
+          );
+        } else {
+          return Text (
+            widget._item.id.toString() + '₴',
+          );
+        }
+      },
     );
   }
 }

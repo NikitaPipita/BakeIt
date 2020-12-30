@@ -40,12 +40,12 @@ class _CakeTextFormState extends State<CakeTextForm> {
   bool isDataFromDatabaseLoaded = false;
 
   ///List of available ingredients
-  final List<String> ingredientTitles = List();
+  var ingredientTitles = <String>[];
 
   ///Available ingredients database info (product table)
   ///String: ingredient title
   ///int: ingredient id
-  final Map<String, int> ingredientsInfo = Map();
+  var ingredientsInfo = <String, int>{};
 
   ///Map with elements of ingredients dynamic list
   ///key: widget id
@@ -53,7 +53,7 @@ class _CakeTextFormState extends State<CakeTextForm> {
   final Map<int, Map<IngredientLineWidgetParams, Widget>> ingredientLineMap = Map();
 
   ///Set of ingredients id whose foreign key is the id of this cake
-  final Set<int> ingredientDatabaseRecords = Set();
+  var ingredientDatabaseRecords = <int>{};
 
   ///widget id counter
   int widgetId = 0;
@@ -258,9 +258,8 @@ class _CakeTextFormState extends State<CakeTextForm> {
         if(_formKey.currentState.validate()) {
           bool checkKeys = true;
           for (GlobalKey<FormState> key in ingredientLineKeys) {
-            if (!key.currentState.validate()) {
+            if (!key.currentState.validate())
               checkKeys = false;
-            }
           }
           if (checkKeys) {
             DatabaseHelper.insertCake(_titleController.text);

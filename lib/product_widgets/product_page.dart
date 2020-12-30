@@ -111,7 +111,8 @@ class _ProductTextFormState extends State<ProductTextForm> {
           ),
           TextFormField(
             controller: _countController,
-            keyboardType: TextInputType.numberWithOptions(signed: false, decimal: true),
+            keyboardType: TextInputType
+                .numberWithOptions(signed: false, decimal: true),
             decoration: InputDecoration(
               labelText: 'Кол-во продукта в граммах или миллилитрах',
             ),
@@ -127,7 +128,8 @@ class _ProductTextFormState extends State<ProductTextForm> {
           ),
           TextFormField(
             controller: _priceController,
-            keyboardType: TextInputType.numberWithOptions(signed: false, decimal: true),
+            keyboardType: TextInputType
+                .numberWithOptions(signed: false, decimal: true),
             decoration: InputDecoration(
               labelText: 'Стоимость продукта',
             ),

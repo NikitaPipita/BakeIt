@@ -15,7 +15,7 @@ class _ProductListState extends State<ProductList> {
     return Container(
       child: FutureBuilder<List<ProductModel>>(
         future: DatabaseHelper.getProducts(),
-        builder: (BuildContext context, AsyncSnapshot<List<ProductModel>> snapshot) {
+        builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
               itemCount: snapshot.data.length,
